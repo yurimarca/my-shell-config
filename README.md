@@ -1,6 +1,6 @@
-# My Shell Config
+# Cosmic Ray: Universal Shell
 
-**A portable, "batteries-included" shell environment for Data & AI Engineers.**
+**A portable, "batteries-included" shell environment for Data & AI/ML Engineers.**
 
 This repository contains a unified configuration for **Zsh** and **Bash**. It is designed to be distro-agnostic—working identically on Pop!_OS, Fedora, Ubuntu, or remote cloud servers—without interfering with your desktop environment (GNOME/COSMIC).
 
@@ -30,15 +30,20 @@ chmod +x install.sh
 ./install.sh
 ```
 
-### 3\. ⚠️ Manual Step: Select Font
+### 3\. ⚠️ CRITICAL: Configure Font (Pop\!\_OS)
 
-The installer adds **FiraCode Nerd Font** to your system, but it cannot force your terminal emulator to use it.
+The installer adds **FiraCode Nerd Font** to your system, but **you must manually select it** in your terminal settings. If you skip this, your prompt will show broken squares (□) instead of icons.
 
-1.  Open your Terminal Preferences (GNOME Terminal, Kitty, Alacritty, etc.).
-2.  Locate the **Font** or **Text** section.
-3.  Select **"FiraCode Nerd Font"** (or "Regular").
-      * *If you skip this, your prompt icons will look like broken squares (□).*
-4.  Restart your terminal.
+**Instructions for Pop\!\_OS (GNOME Terminal):**
+
+1.  Open your Terminal.
+2.  Click the **≡ (Hamburger Menu)** in the top bar → **Preferences** (or right-click the terminal window → Preferences).
+3.  In the sidebar, click on your current profile (usually named **"Unnamed"** or "Default").
+4.  Go to the **Text** tab.
+5.  Check the box **[x] Custom font**.
+6.  Click the font name button and search for **"FiraCode Nerd Font"** (or "FiraCode Nerd Font Mono").
+7.  Select it and click **Select**.
+8.  *Optional:* Restart your terminal to ensure icons render perfectly.
 
 -----
 
@@ -70,3 +75,8 @@ The `.aliases` file is optimized for an AI engineering workflow:
 | `reload` | `source ~/.zshrc` | Reload configuration changes |
 
 -----
+
+## 📝 Recovery
+
+The installer automatically backs up your existing configuration files before overwriting them. Look for a folder named:
+`~/dotfiles_backup_YYYYMMDD_HHMMSS`
