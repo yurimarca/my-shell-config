@@ -66,7 +66,6 @@ The `.aliases` file is optimized for an AI engineering workflow:
 | `py` | `python` | Standard Python invocation |
 | `juno` | `jupyter notebook` | Launches Jupyter |
 | `gpu` | `watch -n 1 nvidia-smi` | Real-time GPU monitoring for training |
-| `venv` | *Custom function* | Creates & activates a fresh `venv` |
 | `zshconfig` | `nano ~/.zshrc` | Quickly edit shell config |
 | `reload` | `source ~/.zshrc` | Reload configuration changes |
 
