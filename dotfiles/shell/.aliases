@@ -1,0 +1,24 @@
+# --- NAVIGATION ---
+alias cls="clear"
+alias ll="ls -alF"
+alias la="ls -A"
+alias l="ls -CF"
+alias ..="cd .."
+
+# --- PYTHON & AI ---
+alias py="python"
+alias juno="jupyter notebook"
+
+# --- GIT ---
+alias gs="git status"
+alias gc="git commit -m"
+alias gp="git push"
+alias gl="git log --oneline --graph --decorate"
+
+# --- SYSTEM ---
+alias zshconfig="nano ~/.zshrc"
+alias bashconfig="nano ~/.bashrc"
+alias reload="source ~/.zshrc" # or .bashrc depending on shell
+
+# --- HARDWARE ---
+alias gpu="watch -n 1 nvidia-smi" # Great for monitoring training
