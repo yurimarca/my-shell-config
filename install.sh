@@ -10,14 +10,13 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}--- Starting Project Cosmic Ray Setup ---${NC}"
+echo -e "${BLUE}--- Starting Project Cosmic Ray Setup (UV Edition) ---${NC}"
 
 # --- 1. Dependencies ---
 echo -e "${YELLOW}Checking dependencies...${NC}"
 if ! command -v unzip &> /dev/null; then
     echo "Installing 'unzip'..."
-    sudo apt install unzip -y  # Assumes Pop!_OS/Ubuntu/Debian
-    # For Fedora use: sudo dnf install unzip -y
+    sudo apt update && sudo apt install unzip -y
 fi
 
 # --- 2. Install Oh My Zsh ---
@@ -28,7 +27,15 @@ else
     echo -e "${GREEN}Oh My Zsh already installed.${NC}"
 fi
 
-# --- 3. Install Themes & Plugins ---
+# --- 3. Install uv (The Python Manager) ---
+if ! command -v uv &> /dev/null; then
+    echo -e "${YELLOW}Installing uv...${NC}"
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+else
+    echo -e "${GREEN}uv already installed.${NC}"
+fi
+
+# --- 4. Install Themes & Plugins ---
 echo -e "${YELLOW}Fetching plugins & themes...${NC}"
 # Spaceship Theme
 if [ ! -d "$ZSH_CUSTOM/themes/spaceship-prompt" ]; then
@@ -43,29 +50,21 @@ fi
 [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ] && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# --- 4. Install Nerd Fonts (FiraCode) ---
+# --- 5. Install Nerd Fonts (FiraCode) ---
 if [ ! -f "$FONT_DIR/FiraCodeNerdFont-Regular.ttf" ]; then
     echo -e "${YELLOW}⬇️  Downloading FiraCode Nerd Font...${NC}"
     mkdir -p "$FONT_DIR"
-    
-    # Download latest release
     curl -fLo "/tmp/FiraCode.zip" "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip"
-    
-    # Unzip only the TTF files to the font directory
     unzip -o -q "/tmp/FiraCode.zip" -d "$FONT_DIR"
-    
-    # Cleanup
     rm "/tmp/FiraCode.zip"
-    
-    # Update Linux Font Cache
-    echo -e "${YELLOW}🔄 Updating font cache (this may take a moment)...${NC}"
+    echo -e "${YELLOW}🔄 Updating font cache...${NC}"
     fc-cache -f -v > /dev/null
     echo -e "${GREEN}✅ FiraCode installed!${NC}"
 else
     echo -e "${GREEN}Fonts already installed.${NC}"
 fi
 
-# --- 5. Link Configs ---
+# --- 6. Link Configs ---
 echo -e "${YELLOW}Linking config files...${NC}"
 ln -sf "$DOTFILES_DIR/shell/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES_DIR/shell/.aliases" "$HOME/.aliases"
