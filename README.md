@@ -2,14 +2,15 @@
 
 **A portable, "batteries-included" shell environment for Data & AI/ML Engineers.**
 
-This repository contains a unified configuration for **Zsh** and **Bash**. It is designed to be distro-agnostic—working identically on Pop!_OS, Fedora, Ubuntu, or remote cloud servers.
+This repository contains a unified configuration for **Zsh**. It is designed to be distro-agnostic—working identically on **Ubuntu, Pop!_OS, Debian, Fedora, CentOS, and RHEL**.
 
 ## 📦 What's Included?
 
-* **⚡ Automated Installer:** A single script installs **Oh My Zsh**, **Spaceship Theme**, and **Nerd Fonts**.
-* **🐍 Modern Python:** Uses **[uv](https://github.com/astral-sh/uv)** for blazing fast Python version management and package resolution.
+* **⚡ Universal Installer:** Automatically detects your OS (`apt` or `dnf`) and installs dependencies.
+* **🚀 Starship Prompt:** A high-performance, cross-shell prompt (Powerline style).
+* **🛠️ Self-Healing:** The installer automatically fixes broken paths and missing plugins.
+* **🐍 Modern Python:** Uses **[uv](https://github.com/astral-sh/uv)** for blazing fast Python version management.
 * **🧠 Smart Activation:** Automatically activates `.venv` environments when you `cd` into a project folder.
-* **🎨 Starship Prompt:** A custom, high-contrast "Powerline" style prompt.
 * **🔧 AI Tooling:** Pre-configured aliases for Python, Jupyter, Docker, and NVIDIA GPU monitoring.
 
 ---
@@ -17,27 +18,36 @@ This repository contains a unified configuration for **Zsh** and **Bash**. It is
 ## 🚀 Installation
 
 ### 1. Clone
+You can clone this repository anywhere (e.g., `~/Code` or `~/dotfiles`). The installer will automatically detect its location.
+
 ```bash
 git clone git@github.com:yurimarca/my-shell-config.git ~/dotfiles
-````
+cd ~/dotfiles
+```
 
 ### 2\. Run Installer
 
 ```bash
-cd ~/dotfiles
 chmod +x install.sh
 ./install.sh
 ```
 
-### 3\. ⚠️ Configure Font
+### 3\. Post-Install Setup
 
-Set your terminal font to **FiraCode Nerd Font** to see icons correctly.
+After the script finishes:
+
+1.  **Set Font:** Open your terminal preferences and select **FiraCode Nerd Font** (installed automatically).
+2.  **Change Shell:** Set Zsh as your default shell:
+    ```bash
+    chsh -s $(which zsh)
+    ```
+3.  **Restart:** Log out and log back in to apply all changes.
 
 -----
 
 ## ⚡ Workflow: Using `uv`
 
-This setup replaces Conda/Pip with `uv`.
+This setup replaces Conda/Pip with `uv` for instant environment management.
 
 | Task | Command |
 | :--- | :--- |
@@ -62,3 +72,15 @@ If you run `uv venv` in a folder, your shell will automatically detect the `.ven
 | `gpu` | `watch -n 1 nvidia-smi` | Real-time GPU monitoring |
 | `zshconfig` | `nano ~/.zshrc` | Edit shell config |
 | `reload` | `source ~/.zshrc` | Reload configuration |
+
+-----
+
+## 🔧 Troubleshooting
+
+  * **Prompt symbols looking weird?**
+      * Make sure your terminal (GNOME Terminal, VSCode, etc.) is using **FiraCode Nerd Font**.
+  * **"Command not found: uv"?**
+      * Restart your terminal. The installer fixes your `$PATH`, but it requires a restart to load.
+  * **"Oh My Zsh" errors?**
+      * Run `./install.sh` again. The new script has a self-healing feature that detects and repairs broken installations.
+
